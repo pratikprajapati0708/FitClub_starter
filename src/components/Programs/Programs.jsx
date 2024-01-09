@@ -19,11 +19,11 @@ const Programs = () => {
                         <span>{program.heading}</span>
                         <span>{program.details}</span>
                         <div className="join-now">
-                            <span><Link
+                            <button><Link
                                 to='join-us' spy={true} smooth={true}
                                 onClick={() => setMenuOpened(false)}
                                 activeClass='active'
-                            >Join Now</Link></span>
+                            >Join Now</Link></button>
                             <span><img src={RightArrow} alt="" /></span>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Hero.css'
 import Header from './Header'
 import hero_image from '../assets/hero_image.png'
@@ -7,9 +7,12 @@ import Heart from '../assets/heart.png'
 import Calories from '../assets/calories.png'
 import { motion } from 'framer-motion'
 import NumberCounter from 'number-counter'
+import { Link } from 'react-scroll'
+
 const Hero = () => {
     const transition = { type: 'spring', duration: 3 }
-    const mobile = window.innerWidth<=768 ? true:false;
+    const mobile = window.innerWidth <= 768 ? true : false;
+    const [menuOpened, setMenuOpened] = useState(false);
     return (
         <div className='Hero' id='home'>
             <div className='blur hero-blur'></div>
@@ -17,7 +20,7 @@ const Hero = () => {
                 <Header />
                 <div className='the-best-ad'>
                     <motion.div
-                        initial={{ left: mobile? '165px' : '238px' }}
+                        initial={{ left: mobile ? '165px' : '238px' }}
                         whileInView={{ left: '8px' }}
                         transition={{ ...transition, type: 'tween' }}
                     >
@@ -38,15 +41,15 @@ const Hero = () => {
                 </div>
                 <div className="text-figures">
                     <div>
-                        <span><NumberCounter end={140} start={100} delay='4' prefix="+"/></span>
+                        <span><NumberCounter end={140} start={100} delay='4' prefix="+" /></span>
                         <span>experts</span>
                     </div>
                     <div>
-                        <span><NumberCounter end={978} start={800} delay='4' prefix="+"/></span>
+                        <span><NumberCounter end={978} start={800} delay='4' prefix="+" /></span>
                         <span>members</span>
                     </div>
                     <div>
-                        <span><NumberCounter end={50} start={0} delay='4' prefix="+"/></span>
+                        <span><NumberCounter end={50} start={0} delay='4' prefix="+" /></span>
                         <span>fitness programs</span>
                     </div>
                 </div>
@@ -56,7 +59,11 @@ const Hero = () => {
                 </div>
             </div>
             <div className="right-h">
-                <button className="btn">Join Now</button>
+                <button className="btn"><Link
+                    to='join-us' spy={true} smooth={true}
+                    onClick={() => setMenuOpened(false)}
+                    activeClass='active'
+                >Join Us</Link></button>
                 <motion.div className="heart-bpm"
                     initial={{ right: "-1rem" }}
                     whileInView={{ right: "4rem" }}
@@ -67,11 +74,11 @@ const Hero = () => {
                     <span>116 bpm</span>
                 </motion.div>
                 <img src={hero_image} alt="" className='hero-img' />
-                <motion.img 
-                initial={{right:'11rem'}}
-                whileInView={{right:'28rem'}}
-                transition={transition}
-                src={hero_image_back} alt="" className='hero-img-back' />
+                <motion.img
+                    initial={{ right: '11rem' }}
+                    whileInView={{ right: '28rem' }}
+                    transition={transition}
+                    src={hero_image_back} alt="" className='hero-img-back' />
                 <motion.div className="calories-burned"
                     initial={{ right: "37rem" }}
                     whileInView={{ right: "28rem" }}

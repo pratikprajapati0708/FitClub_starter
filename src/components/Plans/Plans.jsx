@@ -3,7 +3,7 @@ import '../Plans/Plans.css'
 import { plansData } from '../data/plansData'
 import whiteTick from '../../assets/whiteTick.png'
 const Plans = () => {
-    const amount = 500;
+    const amount = 249400;
     const currency = "INR";
     const receiptId = "qwsaq1";
     const PaymentHandler = async (e) => {

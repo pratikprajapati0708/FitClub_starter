@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react'
 import '../Join/Join.css'
 import emailjs from '@emailjs/browser'
+import { Alert } from '@mui/material';
+
 const Join = () => {
     const [formData, setFormData] = useState({});
     const handleForm = (e) => {
@@ -10,38 +12,44 @@ const Join = () => {
             [name]: value,
         }));
     }
-    //Connecting the node js server
-    const handleSubmit =async(e)=>{
-        e.preventDefault();
-        console.log(formData);
-        const response = await fetch('http://localhost:8080', {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const data = await response.json();
-        console.log(data);
-    }
+    //Connecting the node jss
+    // const handleSubmit =async(e)=>{
+    //     e.preventDefault();
+    //     console.log(formData);
+    //     const response = await fetch('http://localhost:8080', {
+    //         method: 'POST',
+    //         body: JSON.stringify(formData),
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+    //     const data = await response.json();
+    //     console.log(data);
+    // }
     // Using Email JS 
-    const eform = useRef();
+    const form = useRef();
     const sendEmail = async (e) => {
         e.preventDefault();
-        const response = await fetch('http://localhost:8080', {
-            method: 'POST',
-            body: JSON.stringify(eform),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const data = await response.json();
-        console.log(data);
-        emailjs.sendForm('service_120mkys', 'template_q7xe2gh', eform.current, 'jEHKVcMHfeBQd2QUg')
+        //Connecting MONGODB 
+
+        // const response = await fetch('http://localhost:8080', {
+        //     method: 'POST',
+        //     body: JSON.stringify(form),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+        // const data = await response.json();
+        // console.log(data);
+        emailjs.sendForm('service_120mkys', 'template_q7xe2gh', form.current, 'jEHKVcMHfeBQd2QUg')
             .then((result) => {
                 console.log(result.text);
+                alert("Email has been sent. We'll be contacting in your email soon");
+                setFormData({ email: '' }); 
+                
             }, (error) => {
                 console.log(error.text);
+                alert("Internal Sever Error. Please try again later!");
             });
     };
     return (
@@ -57,11 +65,11 @@ const Join = () => {
                 </div>
             </div>
             <div className='right-join'>
-                <form /*ref={eform}*/ onSubmit={handleSubmit} className="email-input" /*onSubmit={sendEmail}*/>
+                <form ref={form} /*onSubmit={handleSubmit}*/ className="email-input" onSubmit={sendEmail}>
 
                     <input
                         type="email"
-                        name='useremail'
+                        name='user-email'
                         placeholder='enter email'
                         value={formData.email}
                         onChange={handleForm}
